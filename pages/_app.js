@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import Layout from '../components/layout/layout';
 import Head from 'next/head';
 import '../styles/globals.css';
 import Notification from '../components/ui/notification';
 import NotificationContextProvider from '../context/NotificationContext';
+import { NotificationContext } from '../context/NotificationContext';
 
 function MyApp({ Component, pageProps }) {
+  const notificationCtx = useContext(NotificationContext);
+
+  const activeNotification = notificationCtx.notification;
+
   return (
     <NotificationContextProvider>
       <Layout>
@@ -17,7 +23,13 @@ function MyApp({ Component, pageProps }) {
           />
         </Head>
         <Component {...pageProps} />
-        <Notification title="Test" message="This is a test." status="error" />
+        {activeNotification && (
+          <Notification
+            title={activeNotification.title}
+            message={activeNotification.message}
+            status={activeNotification.status}
+          />
+        )}
       </Layout>
     </NotificationContextProvider>
   );
