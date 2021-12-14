@@ -1,9 +1,9 @@
 import { MongoClient } from 'mongodb';
 
 export async function connectDatabase() {
-  const client = await MongoClient.connect(
-    'mongodb+srv://nchmn907:Nacho2200@cluster0.gev1u.mongodb.net/events?retryWrites=true&w=majority'
-  );
+  const connectingString = `mongodb+srv://${mongodb_username}:${mongodb_username}@${monogdb_clustername}.gev1u.mongodb.net/${mongodb_database}?retryWrites=true&w=majority`;
+
+  const client = await MongoClient.connect(connectingString);
 
   return client;
 }
